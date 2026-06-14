@@ -381,8 +381,8 @@
 
   <div class="hero">
     <h1>CLS Process Flow Charts — Updated</h1>
-    <p>Revised process flows incorporating all decisions and changes from the May 29, 2026 requirements meeting with CL Synergy. Changes are highlighted with badges so the team can see exactly what moved.</p>
-    <div class="version">Post-Meeting Revision · May 29, 2026 · Based on CL Connect Transcript</div>
+    <p>Revised process flows incorporating all decisions and changes from the May 29, 2026 requirements meeting with CL Synergy, plus feedback from the CL Synergy Workflow Review. Changes are highlighted with badges so the team can see exactly what moved.</p>
+    <div class="version">Post-Feedback Revision · June 2026 · Based on CL Connect Transcript + Workflow Feedback</div>
   </div>
 
   <div class="legend">
@@ -435,48 +435,73 @@
       <div class="arrow">→</div>
       <div class="step system">
         <span class="role">CS / Sales</span>
-        <div class="title">Check rates in AMS</div>
-        <div class="desc">CS or Sales checks if a contract, monthly, or NAC rate is already available in the rate database.</div>
-        <div class="change-note changed">▲ Sales now also has access to rate checking — not just CS. Named Account (NAC) rates visible only to assigned salesperson and procurement.</div>
+        <div class="title">Multi-step rate check</div>
+        <div class="desc">Rates checked across multiple sources: AMS contracted/monthly rates → spot rates (liner portal / INTTRA) → volume-based rates → NAC rates (restricted). Best available options collected.</div>
+        <div class="change-note changed">▲ Now a multi-source check: AMS for contracted rates, liner portals / INTTRA for real-time spot rates, volume-based rates where applicable, NAC rates for named accounts (restricted to assigned salesperson + procurement). Sales has full access to spot rates alongside CS.</div>
       </div>
       <div class="arrow">→</div>
       <div class="step decision">
-        <span class="role">CS / Sales</span>
-        <div class="title">Rate available?</div>
-        <div class="desc">If no rate found, escalate to Procurement. Even if rates exist, can still escalate to Procurement for better options.</div>
-        <div class="change-note changed">▲ Escalation to Procurement is always optional — even when rates exist, the option to escalate is kept open.</div>
+        <span class="role">CS / Sales / Procurement</span>
+        <div class="title">Rate available? Escalate?</div>
+        <div class="desc">If no rate found, escalate to Procurement. Even if rates exist, can still escalate for better options or spot rate opportunities.</div>
+        <div class="change-note changed">▲ Escalation to Procurement is always optional — even when rates exist. Procurement can also proactively surface spot rates that beat contracted rates.</div>
       </div>
       <div class="arrow">→</div>
       <div class="step">
         <span class="role">Sales / CS</span>
-        <div class="title">Send quotation to customer</div>
-        <div class="desc">Quotation is prepared with markup and sent to the customer via email or WhatsApp.</div>
-        <div class="change-note changed">▲ Both Sales and CS can send quotations directly to the customer. Previously only CS could send.</div>
+        <div class="title">Send multiple quotation options</div>
+        <div class="desc">Multiple liner options compiled and sent to the customer. Customer selects preferred liner/rate. Sent via email or WhatsApp. Can include a mix of contracted, spot, and volume-based rates from different liners.</div>
+        <div class="change-note changed">▲ Not a single quote — multiple liner options sent so the customer can choose. Both Sales and CS can send. Procurement can manually add spot options alongside system-generated ones.</div>
       </div>
     </div>
 
     <div class="split">
       <div class="mini">
-        <div class="mini-title">Rate types handled <span class="badge badge-changed">Changed</span></div>
+        <div class="mini-title">Rate types &amp; checking sequence <span class="badge badge-changed">Changed</span></div>
         <div class="mini-flow">
-          <div class="mini-step"><strong>Contracted rate</strong> — Monthly or quarterly validity, from liner agreements. Procurement maintains the database.</div>
-          <div class="mini-step"><strong>Spot rate</strong> — 24 hours to vessel-specific validity. Changes every minute for some liners. Relevant mainly at booking, not quotation time.</div>
-          <div class="mini-step"><strong>NAC rate</strong> — Special rates for ~10 named accounts per trade lane. Valid 6–12 months. Restricted visibility: only assigned salesperson + procurement.</div>
-          <div class="mini-step"><strong>China rates</strong> — Vessel-by-vessel, overnight changes. Different from the European monthly model.</div>
+          <div class="mini-step"><strong>1. Contracted rate</strong> — Monthly or quarterly validity, from liner agreements. Procurement maintains in AMS. Checked first.</div>
+          <div class="mini-step"><strong>2. Spot rate</strong> — 24 hours to vessel-specific validity. Changes every minute for some liners. Checked at inquiry AND booking — everyone (Sales, CS, Procurement) should have real-time access. Not maintained in AMS.</div>
+          <div class="mini-step"><strong>3. Volume-based rate</strong> — Based on shipment volume commitments. Not maintained in AMS — needs new system support.</div>
+          <div class="mini-step"><strong>4. NAC rate</strong> — Special rates for ~10 named accounts per trade lane. Valid 6–12 months. Restricted visibility: only assigned salesperson + procurement. No price-request process needed.</div>
+          <div class="mini-step"><strong>5. China rates</strong> — Vessel-by-vessel, overnight changes. Different from the European monthly model.</div>
         </div>
       </div>
       <div class="mini">
-        <div class="mini-title">Rate database gap <span class="badge badge-new">Key Issue</span></div>
+        <div class="mini-title">Rate Maintenance workflow <span class="badge badge-new">New Flow</span></div>
         <div class="mini-flow">
-          <div class="mini-step risk">Pricing teams currently update rates manually via Excel and WhatsApp commercial groups. No structured database exists yet.</div>
-          <div class="mini-step">System must support Excel upload for rate ingestion and manual entry fallback.</div>
-          <div class="mini-step">Separate conversation needed on rate database architecture — acknowledged as the biggest unresolved gap.</div>
-          <div class="mini-step">Commodity-based premiums (food items, hazardous, etc.) and container-size-based rates (20ft vs 40ft) must be supported.</div>
+          <div class="mini-step"><strong>Liner publishes rate</strong> — via email, WhatsApp commercial group, or liner portal. Contracted rates monthly/quarterly, spot rates change every minute for some liners.</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Pricing team receives &amp; enters</strong> — currently manual via Excel. System must support Excel bulk upload for rate ingestion and manual entry fallback.</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>INTTRA / WiseTech auto-pull</strong> — spot rates and schedules auto-populated via middleware (available within ~4 months). Removes manual entry for supported liners.</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Rate validated &amp; categorized</strong> — tagged as contracted, spot, volume-based, or NAC. Commodity premiums (food, hazardous) and container-size rates (20ft vs 40ft) applied.</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Rate available in system</strong> — searchable by CS, Sales, Procurement. NAC rates restricted. Spot rates visible to all (Sales, CS, Procurement).</div><div class="mini-arrow">↓</div>
+          <div class="mini-step risk"><strong>Key gap:</strong> Spot rates and volume-based rates are NOT in AMS today. No structured database exists yet. Rate database architecture is the biggest unresolved item.</div>
         </div>
       </div>
     </div>
 
     <div class="callout"><strong>Meeting decision:</strong> Surcharges should be presented as all-in rates (base + surcharges combined) — CLS does not need an itemized surcharge breakdown on the quotation.</div>
+
+    <div class="split">
+      <div class="mini">
+        <div class="mini-title">Customer master creation — duplicate prevention <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>New customer request</strong> — CS or Sales initiates customer registration via workspace or command center</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Duplicate check</strong> — system performs fuzzy match on company name, address, contact person, email, phone. If potential duplicate found, user is prompted to link to existing record instead of creating new</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Customer details captured</strong> — name, email, address, telephone, contact person, customer type (shipper/buyer/agent/trader). Linked to salesperson assignment</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Finance KYC approval</strong> — submitted to Finance for background/credit check. Finance approves or rejects. No inquiry can proceed until Finance approves</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Customer code generated</strong> — master record created in system. Synced to GenSoft and AMS. Customer available for future inquiries without re-registration</div>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">Duplicate risk &amp; current gaps <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step risk"><strong>Problem:</strong> Same customer can be registered multiple times across AMS, GenSoft, and new system if no cross-system check exists</div>
+          <div class="mini-step risk"><strong>Problem:</strong> Different salespeople may independently register the same company under slightly different names (e.g. "CL Synergy" vs "CLS" vs "C.L. Synergy Pvt Ltd")</div>
+          <div class="mini-step"><strong>Solution:</strong> Single point of customer creation with fuzzy matching. All downstream systems (GenSoft, AMS, CL Connect) reference the same master ID</div>
+          <div class="mini-step"><strong>Solution:</strong> Finance approval gate prevents unapproved customers from entering any workflow. Approval status visible to CS and Sales</div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -578,9 +603,19 @@
           <div class="mini-step risk">Cancellation charges apply — this is a commercial risk decision</div>
         </div>
       </div>
+      <div class="mini">
+        <div class="mini-title">Contract space / slot utilization tracking <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>Total contracted space</strong> — contracted TEU/container allocation per trade lane per period, pulled from liner agreements</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Confirmed bookings</strong> — bookings placed against contracted space. System tracks count at booking level (e.g. 500 of 1,000 TEU confirmed)</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Actual containers shipped (BL level)</strong> — variance tracked at BL stage. If 5 containers booked but only 4 shipped, difference logged</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>"Balance to sell"</strong> — remaining capacity visible to Sales. Salesperson can follow up with customer on unused containers or find new cargo</div><div class="mini-arrow">↓</div>
+          <div class="mini-step risk"><strong>Risk visibility:</strong> CL Synergy-initiated speculative bookings vs customer-requested bookings must be tracked separately. Cancellation charge exposure and fill rate reported to management</div>
+        </div>
+      </div>
     </div>
 
-    <div class="callout callout-purple"><strong>New requirement — Booking amendments:</strong> After a booking is placed, customers may request container quantity changes (e.g. 5→10 containers). The system must support amendments to existing bookings, not just new bookings. Container variance tracking is also needed: if 5 booked but only 4 shipped, the difference is logged at BL level and visible to Sales as "balance to sell."</div>
+    <div class="callout callout-purple"><strong>New requirement — Booking amendments &amp; utilization:</strong> After a booking is placed, customers may request container quantity changes (e.g. 5→10 containers). The system must support amendments to existing bookings, not just new bookings. Container variance tracking is needed: if 5 booked but only 4 shipped, the difference is logged at BL level and visible to Sales as "balance to sell." Contract space utilization (contracted vs booked vs shipped) must be reportable per trade lane, per liner, per period — see Flow 8 for reporting details.</div>
 
   </div>
 
@@ -686,6 +721,28 @@
     </div>
 
     <div class="callout callout-blue"><strong>GenSoft handoff:</strong> The new system handles the workflow up to BL creation. From BL stage onward, data is replicated in GenSoft for job creation, invoicing, costing, and document management. API integration with GenSoft is planned to avoid duplicate entry. Documentation team works primarily in GenSoft for HBL creation and customer invoicing.</div>
+
+    <div class="split">
+      <div class="mini">
+        <div class="mini-title">Vessel creation &amp; tracking <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>Booking confirmed</strong> — vessel/voyage assigned by liner at booking confirmation</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Check if vessel exists</strong> — system checks if vessel + voyage + POD (port of discharge) combo already exists in GenSoft. Same vessel/voyage can serve multiple bookings</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>If new: create vessel record</strong> — currently manual in GenSoft. Vessel created per trade lane, per voyage, per POD. One-time creation — others reuse it</div><div class="mini-arrow">↓</div>
+          <div class="mini-step system"><strong>INTTRA integration (target)</strong> — vessel schedules, ETD/ETA, and voyage data should be auto-pulled from INTTRA to eliminate manual vessel creation. Tracking updates also via INTTRA</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Job creation proceeds</strong> — once vessel record exists, documentation team can create jobs in GenSoft without re-entering vessel details</div>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">Reporting / list creation <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>Pending BL drafts</strong> — list of BLs awaiting customer approval, sortable by cut-off urgency</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Amendment tracking</strong> — BL correction cycles logged. How many rounds per customer, average time to finalize</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Finance approval queue</strong> — BLs held for credit-related or payment approval. Visible to Finance and Docs teams</div><div class="mini-arrow">↓</div>
+          <div class="mini-step"><strong>Filing deadlines</strong> — US AMS filings, EBL requirements, cut-off compliance. Queryable via Command Center</div>
+        </div>
+      </div>
+    </div>
 
     <div class="callout callout-purple" style="margin-top:10px"><strong>EBL readiness (2028):</strong> European boards will mandate Electronic Bills of Lading from 2028 — €65 penalty per paper BL. The INTTRA module supports MBL functions for EBL. WiseTech/Citra/E2O platforms being evaluated for integration.</div>
 
@@ -819,8 +876,8 @@
       <div class="step system">
         <span class="role">Middleware</span>
         <div class="title">INTTRA / WiseTech</div>
-        <div class="desc">Middleware for liner connectivity — rates, schedules, bookings, SI submission. Recently acquired by WiseTech (CargoWise parent). Spot rates available within ~4 months.</div>
-        <div class="change-note changed">▲ Primary integration path. Not all liners supported — manual fallback always required.</div>
+        <div class="desc">Middleware for liner connectivity — rates, schedules, bookings, SI submission, and vessel tracking. Recently acquired by WiseTech (CargoWise parent). Spot rates available within ~4 months.</div>
+        <div class="change-note changed">▲ Primary integration path. Vessel schedules, ETD/ETA, and voyage data to be auto-pulled to eliminate manual vessel creation in GenSoft. Not all liners supported — manual fallback always required.</div>
       </div>
       <div class="arrow">→</div>
       <div class="step system">
@@ -862,6 +919,68 @@
         </div>
       </div>
     </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 8 -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-head">
+      <h2>Flow 8 — Command Center, Reporting &amp; Analytics</h2>
+      <span class="badge badge-new">New</span>
+      <button type="button" class="fb-trigger" data-flow="flow-8" data-title="Flow 8 — Command Center, Reporting &amp; Analytics"><span class="fb-icon">💬</span> Feedback <span class="fb-count"></span></button>
+    </div>
+    <div class="flow">
+      <div class="step system">
+        <span class="role">All Roles</span>
+        <div class="title">Command Center</div>
+        <div class="desc">Chat-based interface for natural language queries. Role-specific quick commands: new inquiry, follow up, pending items. Users type queries like "what are my pending jobs" and get structured results.</div>
+        <div class="change-note new">★ One of three primary operating interfaces alongside Dashboard and Workspace. Each role (CS, Sales, Procurement, Docs) gets role-specific quick commands and query access.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step">
+        <span class="role">System</span>
+        <div class="title">List generation</div>
+        <div class="desc">Queries return structured lists: pending inquiries, overdue SIs, upcoming cut-offs, bookings awaiting confirmation, BLs pending approval. Filterable by date, customer, salesperson, trade lane.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step doc">
+        <span class="role">All Roles</span>
+        <div class="title">Reports &amp; exports</div>
+        <div class="desc">Lists exportable as reports. KPIs configurable per role. Pending jobs, quotation conversion rates, booking fill rates, cut-off compliance — all queryable.</div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="step system">
+        <span class="role">Management</span>
+        <div class="title">Dashboard KPIs</div>
+        <div class="desc">Role-customized dashboards. CS sees pending inquiries and SI status. Sales sees quotation pipeline and customer activity. Procurement sees booking fill rates and contract utilization. Management sees cross-team overview.</div>
+        <div class="change-note new">★ Dashboards configurable — KPIs and metrics can be changed per role without development.</div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="mini">
+        <div class="mini-title">Command Center quick commands <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>Customer Service:</strong> new customer, new inquiry, follow up on inquiry, pending SI reminders, cut-off status</div>
+          <div class="mini-step"><strong>Sales:</strong> my pending quotations, customer activity this week, balance to sell, named account status</div>
+          <div class="mini-step"><strong>Procurement:</strong> pending booking requests, contract utilization %, spot rate opportunities, liner performance</div>
+          <div class="mini-step"><strong>Documentation:</strong> pending BL drafts, amendment cycles, filing deadlines (AMS/EBL), jobs awaiting vessel creation</div>
+        </div>
+      </div>
+      <div class="mini">
+        <div class="mini-title">Analytics &amp; tracking <span class="badge badge-new">New</span></div>
+        <div class="mini-flow">
+          <div class="mini-step"><strong>Contract utilization</strong> — contracted space vs confirmed bookings vs actual shipped. By trade lane, by liner, by period</div>
+          <div class="mini-step"><strong>Booking variance</strong> — booked containers vs actual containers at BL level. "Balance to sell" per booking visible to Sales</div>
+          <div class="mini-step"><strong>Speculative booking risk</strong> — CL Synergy-initiated bookings: fill rate, cancellation charges incurred, revenue impact</div>
+          <div class="mini-step"><strong>Quotation pipeline</strong> — inquiries → quotations sent → accepted → booked → shipped. Conversion at each stage, by salesperson</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout callout-blue"><strong>AI feature (optional):</strong> Natural language processing in Command Center allows free-text queries. Level of AI integration to be decided — can start with quick commands and structured queries, with natural language as an enhancement layer.</div>
 
   </div>
 
@@ -913,7 +1032,7 @@
     </table>
   </div> -->
 
-  <div class="footer">Updated from AS-IS process flows based on the CL Connect meeting transcript — May 29, 2026. Changes highlighted with badges.</div>
+  <div class="footer">Updated from AS-IS process flows based on the CL Connect meeting transcript and CL Synergy Workflow Feedback — June 2026. Changes highlighted with badges.</div>
 </div>
 
 <!-- Feedback side panel -->
